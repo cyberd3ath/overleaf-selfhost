@@ -167,7 +167,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin
 ```
 
-See [11](#references) for the full install matrix across distributions.
+See [[11]](#references) for the full install matrix across distributions.
 
 ### 3. Create a dedicated user and data directories
 
@@ -193,7 +193,7 @@ sudo -u overleaf bin/init
 cat config/version   # the release tag the Toolkit expects, e.g. 6.3.0
 ```
 
-[1](#references)[3](#references)
+[[1]](#references)[[3]](#references)
 
 ### 5. Point the Toolkit at your data directories
 
@@ -216,7 +216,7 @@ surface, so leave it off.
 `OVERLEAF_PORT=18080` (rather than 80) leaves the standard port free for
 Nginx, which will be the only thing listening publicly.
 
-[4](#references)[6](#references)
+[[4]](#references)[[6]](#references)
 
 ### 6. Configure the reverse-proxy variables
 
@@ -236,7 +236,7 @@ generates; `OVERLEAF_BEHIND_PROXY` and `OVERLEAF_SECURE_COOKIE` tell it TLS
 is terminated upstream, so it can issue a `Secure` session cookie. Without
 these, the session cookie is missing `Secure` even over HTTPS.
 
-[5](#references)
+[[5]](#references)
 
 ### 7. arm64 only: build the image locally
 
@@ -288,7 +288,7 @@ as if it were the numbered release. It is not a byte-for-byte copy of the
 official release artifact; rebuild and re-tag it whenever you upgrade the
 Toolkit.
 
-[2](#references)[9](#references)[10](#references)
+[[2]](#references)[[9]](#references)[[10]](#references)
 
 ### 8. Start Overleaf
 
@@ -393,7 +393,7 @@ sudo systemctl reload nginx
 it rejects the TLS handshake outright for unrecognized hostnames rather than
 presenting your certificate to them.
 
-[12](#references)
+[[12]](#references)
 
 ### 10. Get a certificate
 
@@ -418,7 +418,7 @@ The session cookie should now include `Secure`. Test renewal:
 sudo certbot renew --dry-run
 ```
 
-[13](#references)
+[[13]](#references)
 
 ### 11. Set up backups
 
@@ -461,7 +461,7 @@ sudo systemctl start overleaf-backup.service   # run once now to check it works
 sudo journalctl -u overleaf-backup.service -n 50
 ```
 
-[8](#references)
+[[8]](#references)
 
 ### 12. Create the first account and close registration
 
@@ -482,7 +482,7 @@ configure an SMTP backend, since that (mail server, SPF/DKIM/DMARC records)
 is specific to your domain and mail provider. If you want Overleaf to send
 invite/password-reset emails, configure the `OVERLEAF_EMAIL_*` variables in
 `config/variables.env` against your own SMTP provider or mail server, then
-remove the `EMAIL_CONFIRMATION_DISABLED` line. See [7](#references) for the variable
+remove the `EMAIL_CONFIRMATION_DISABLED` line. See [[7]](#references) for the variable
 names.
 
 ## Backups and restore
