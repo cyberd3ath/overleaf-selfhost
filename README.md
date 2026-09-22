@@ -167,7 +167,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io \
     docker-buildx-plugin docker-compose-plugin
 ```
 
-See [11] for the full install matrix across distributions.
+See [11](#references) for the full install matrix across distributions.
 
 ### 3. Create a dedicated user and data directories
 
@@ -193,7 +193,7 @@ sudo -u overleaf bin/init
 cat config/version   # the release tag the Toolkit expects, e.g. 6.3.0
 ```
 
-[1][3]
+[1](#references)[3](#references)
 
 ### 5. Point the Toolkit at your data directories
 
@@ -216,7 +216,7 @@ surface, so leave it off.
 `OVERLEAF_PORT=18080` (rather than 80) leaves the standard port free for
 Nginx, which will be the only thing listening publicly.
 
-[4][6]
+[4](#references)[6](#references)
 
 ### 6. Configure the reverse-proxy variables
 
@@ -236,7 +236,7 @@ generates; `OVERLEAF_BEHIND_PROXY` and `OVERLEAF_SECURE_COOKIE` tell it TLS
 is terminated upstream, so it can issue a `Secure` session cookie. Without
 these, the session cookie is missing `Secure` even over HTTPS.
 
-[5]
+[5](#references)
 
 ### 7. arm64 only: build the image locally
 
@@ -288,7 +288,7 @@ as if it were the numbered release. It is not a byte-for-byte copy of the
 official release artifact; rebuild and re-tag it whenever you upgrade the
 Toolkit.
 
-[2][9][10]
+[2](#references)[9](#references)[10](#references)
 
 ### 8. Start Overleaf
 
@@ -393,7 +393,7 @@ sudo systemctl reload nginx
 it rejects the TLS handshake outright for unrecognized hostnames rather than
 presenting your certificate to them.
 
-[12]
+[12](#references)
 
 ### 10. Get a certificate
 
@@ -418,7 +418,7 @@ The session cookie should now include `Secure`. Test renewal:
 sudo certbot renew --dry-run
 ```
 
-[13]
+[13](#references)
 
 ### 11. Set up backups
 
@@ -461,7 +461,7 @@ sudo systemctl start overleaf-backup.service   # run once now to check it works
 sudo journalctl -u overleaf-backup.service -n 50
 ```
 
-[8]
+[8](#references)
 
 ### 12. Create the first account and close registration
 
@@ -482,7 +482,7 @@ configure an SMTP backend, since that (mail server, SPF/DKIM/DMARC records)
 is specific to your domain and mail provider. If you want Overleaf to send
 invite/password-reset emails, configure the `OVERLEAF_EMAIL_*` variables in
 `config/variables.env` against your own SMTP provider or mail server, then
-remove the `EMAIL_CONFIRMATION_DISABLED` line. See [7] for the variable
+remove the `EMAIL_CONFIRMATION_DISABLED` line. See [7](#references) for the variable
 names.
 
 ## Backups and restore
@@ -523,28 +523,20 @@ it matches the new `config/version` before starting the upgraded stack.
   `.gitignore` if you fork the Toolkit config into a repo), and rotate any
   secret you think may have leaked.
 
-## Files
-
-- `scripts/setup-overleaf.sh`: the automated setup described above
-- `scripts/overleaf-backup.sh`: the backup script installed by setup
-
 ## References
-
-Cited by number (`[n]`) at the points above where the reasoning isn't
-self-explanatory from the command alone.
 
 | # | Topic | Link |
 |---|---|---|
-| [1] | Overleaf Toolkit | <https://github.com/overleaf/toolkit> |
-| [2] | Overleaf source (server-ce) | <https://github.com/overleaf/overleaf> |
-| [3] | Toolkit installation guide | <https://docs.overleaf.com/on-premises/installation/introduction> |
-| [4] | Toolkit environment variables | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/environment-variables> |
-| [5] | TLS proxy configuration | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/tls-proxy> |
-| [6] | Sandboxed compiles (Server Pro) | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/server-pro-only-configuration/sandboxed-compiles> |
-| [7] | Email delivery | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/email-delivery> |
-| [8] | Data and backups | <https://docs.overleaf.com/on-premises/maintenance/data-and-backups> |
-| [9] | arm64 tracking issue | <https://github.com/overleaf/overleaf/issues/881> |
-| [10] | Docker BuildKit | <https://docs.docker.com/build/buildkit/> |
-| [11] | Docker Engine install | <https://docs.docker.com/engine/install/debian/> |
-| [12] | nginx `limit_req` module | <https://nginx.org/en/docs/http/ngx_http_limit_req_module.html> |
-| [13] | Certbot | <https://certbot.eff.org/instructions> |
+| <a id="ref-1"></a>[1] | Overleaf Toolkit | <https://github.com/overleaf/toolkit> |
+| <a id="ref-2"></a>[2] | Overleaf source (server-ce) | <https://github.com/overleaf/overleaf> |
+| <a id="ref-3"></a>[3] | Toolkit installation guide | <https://docs.overleaf.com/on-premises/installation/introduction> |
+| <a id="ref-4"></a>[4] | Toolkit environment variables | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/environment-variables> |
+| <a id="ref-5"></a>[5] | TLS proxy configuration | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/tls-proxy> |
+| <a id="ref-6"></a>[6] | Sandboxed compiles (Server Pro) | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/server-pro-only-configuration/sandboxed-compiles> |
+| <a id="ref-7"></a>[7] | Email delivery | <https://docs.overleaf.com/on-premises/configuration/overleaf-toolkit/email-delivery> |
+| <a id="ref-8"></a>[8] | Data and backups | <https://docs.overleaf.com/on-premises/maintenance/data-and-backups> |
+| <a id="ref-9"></a>[9] | arm64 tracking issue | <https://github.com/overleaf/overleaf/issues/881> |
+| <a id="ref-10"></a>[10] | Docker BuildKit | <https://docs.docker.com/build/buildkit/> |
+| <a id="ref-11"></a>[11] | Docker Engine install | <https://docs.docker.com/engine/install/debian/> |
+| <a id="ref-12"></a>[12] | nginx `limit_req` module | <https://nginx.org/en/docs/http/ngx_http_limit_req_module.html> |
+| <a id="ref-13"></a>[13] | Certbot | <https://certbot.eff.org/instructions> |
